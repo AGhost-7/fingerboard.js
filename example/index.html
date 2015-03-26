@@ -81,6 +81,7 @@ body {
 					<option value='default'>Default</option>
 					<option value='notation'>Notation</option>
 					<option value='notation-index'>Notation with index</option>
+					<option value='degree'>Degree</option>
 				</select>
 			</p>
 		</div>
@@ -132,37 +133,33 @@ body {
 	$.each(viewMods, function(select, update){
 		$(select).on('change', function(ev){
 			update(ev.target.value)
-			var args = {}
+
 			var View = Fingerboard.View
+			var args = (function(){
+				if(selectorStyle === 'notation')
+					return { withIndex: false }
+				else
+					return {}
+			})()
+
+			if(colorScheme === 'blue')
+				$.extend(args, { tonicColor: '#003D7A', elseColor: '#6399CE' })
+			else if(colorScheme === 'red')
+				$.extend(args, { tonicColor:'#5C1C26', elseColor: '#D68391' })
+			else if(colorScheme == 'green')
+				$.extend(args, { tonicColor:'#1C5C21', elseColor: '#6AAB6F' })
 
 			var curry = (function(){
 				if(selectorStyle === 'default')
 					return View.selectors.default
-				else if(selectorStyle === 'notation')
-					return function(tonicColor, elseColor) {
-						return View.selectors.notationDots({
-							tonicColor: tonicColor,
-							elseColor: elseColor,
-							withIndex: false
-						})
-					}
-				else if(selectorStyle === 'notation-index')
-					return View.selectors.notationDots({
-						tonicColor: tonicColor,
-						elseColor: elseColor
-					})
+				else if(selectorStyle === 'notation'
+						|| selectorStyle === 'notation-index')
+					return View.selectors.notationDots
+				else if(selectorStyle === 'degree')
+					return View.selectors.degreeDots
 			})()
 
-			if(colorScheme === 'default')
-				args.drawSelector = curry()
-			else if(colorScheme === 'blue')
-				args.drawSelector = curry('#003D7A','#6399CE')
-			else if(colorScheme === 'red')
-				args.drawSelector = curry('#5C1C26','#D68391')
-			else if(colorScheme == 'green')
-				args.drawSelector = curry('#1C5C21','#6AAB6F')
-
-			fingerboard.set({view: args})
+			fingerboard.set({view: { drawSelector: curry(args) }})
 
 		})
 	})

@@ -56,10 +56,10 @@ class View
     y: e.pageY - canvY
 
   pinpointNote: (x, y) ->
-    openX = @width / (@model.frets * 2)
-    leftover = @width - openX
-    fretWidth = leftover / (@model.frets - 2)
-    fret = if x < openX then 0 else Math.floor((x - openX) / fretWidth) + 1
+    {openFretWidth, fretWidth} = @fretWidths()
+    fret =
+      if x < openFretWidth then 0
+      else Math.floor((x - openFretWidth) / fretWidth) + 1
 
     heightRatio = @height / @model.strings
     string = @model.strings - Math.floor(y / heightRatio)
@@ -137,27 +137,33 @@ class View
         .lineTo(fretStart, height)
         .stroke()
 
-
-  paint: () ->
+  # returns the width of the open fret and of the other frets
+  fretWidths: ->
     # the open note will be a much smaller rectangle with a "fat" line to
     # represent the nut of the instrument
-    openX = @width / (@model.frets * 2)
-    # use the difference to calculate the rest of the frets evenly
-    leftover = @width - openX
+    openFretWidth = @width / (@model.frets * 2)
+    leftover = @width - openFretWidth
     fretWidth = leftover / (@model.frets - 2)
+
+    openFretWidth: openFretWidth
+    fretWidth: fretWidth
+
+  paint: () ->
+    {openFretWidth, fretWidth} = @fretWidths()
     heightRatio = @height / @model.strings
-    radius = if heightRatio > openX then openX / 4 else heightRatio / 4
+    radius =
+      if heightRatio > openFretWidth then openFretWidth / 4
+      else heightRatio / 4
     # the string's location is in the center of the "square" of the note
     stringH  = 0
     fretStart = 0
     fretEnd = 0
     circle = 0
-    color = ''
 
     @model.forEach (note, fret, string) =>
       # the first fret will just start at pixel 1, otherwise standard logic
       # applies
-      fretStart = if !fret then 1 else ((fret - 1) * fretWidth) + openX
+      fretStart = if !fret then 1 else ((fret - 1) * fretWidth) + openFretWidth
       fretEnd = fretStart + fretWidth - 1
       # I need to invert the order of the strings since fingerboards are
       # typically viewed upside down (so that its easy to read the graphic with
@@ -167,18 +173,11 @@ class View
       # the string is located in the middle of the note
       stringY = ((stringInvert - 1) * heightRatio) + (heightRatio / 2)
       # inlay is located at the center of the note.
-      inlayX = fretStart + ((if !fret then openX else fretWidth) / 2)
-
-      # Save the dimensions for later for when I need to isolate the note
-      # which has been hovered or clicked on.
-      #note.dimension.x1 = fretStart
-      #note.dimension.y1 = stringY - (heightRatio / 2)
-      #note.dimension.x2 = fretEnd
-      #note.dimension.y2 = stringY + (heightRatio / 2)
+      inlayX = fretStart + ((if !fret then openFretWidth else fretWidth) / 2)
 
       # if we're at the open note, just need to draw the instrument's string.
       if fret == 0
-        @drawString(@context, @colors.strings, @width, stringY, openX)
+        @drawString(@context, @colors.strings, @width, stringY, openFretWidth)
 
       if string == 1
         @drawFret(@context, fret, fretStart, @height, @colors.frets)

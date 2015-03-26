@@ -23,3 +23,4 @@ describe 'view events', ->
         expect(model.notes[fret]).toBeDefined()
         note = model.notes[fret][string - 1]
         expect(note).toBeDefined()
+  # Not sure how I should test it further...
