@@ -70,35 +70,25 @@ class View
   onMouseClick: (e) =>
     {x, y} = @relativePosition(e)
     {string, fret} = @pinpointNote(x, y)
+
     note = @model.notes[fret][string - 1]
-    console.log(note)
-    @events.broadcast('noteclick', () =>
-      @model.mouseHoveredNote
-    )
+
+    @events.broadcast('noteclick', note)
 
   onMouseMove: (e) =>
     {x, y} = @relativePosition(e)
 
     # check if the note cached is still corresponding to the note that the
     # mouse is on. if mouseHoveredNote note is undefined, we must check.
-    if @model.mouseHoveredNote
-      stateChanged = !@model
-        .mouseHoveredNote
-        .dimension
-        .isPointWithinBounds(x, y)
-    else
-      stateChanged = true
+    {fret, string} = @pinpointNote(x, y)
 
-    if stateChanged
-      {fret, string} = @pinpointNote(x, y)
+    if !@hoveredNote || @hoveredNote.fret != fret || @hoveredNote.string != string
 
       # its possible that find won't be able to locate anything, in which
       # case we'll have to wait for the next event to check again.
       if @model.notes[fret] && @model.notes[fret][string - 1]
-        @model.mouseHoveredNote = @model.notes[fret][string - 1]
-        @events.broadcast('notehover', =>
-          @model.mouseHoveredNote
-        )
+        @hoveredNote = @model.notes[fret][string - 1]
+        @events.broadcast('notehover', @hoveredNote)
 
   updateDimensions: () ->
     @width = @canvas.offsetWidth
@@ -181,10 +171,10 @@ class View
 
       # Save the dimensions for later for when I need to isolate the note
       # which has been hovered or clicked on.
-      note.dimension.x1 = fretStart
-      note.dimension.y1 = stringY - (heightRatio / 2)
-      note.dimension.x2 = fretEnd
-      note.dimension.y2 = stringY - (heightRatio / 2)
+      #note.dimension.x1 = fretStart
+      #note.dimension.y1 = stringY - (heightRatio / 2)
+      #note.dimension.x2 = fretEnd
+      #note.dimension.y2 = stringY + (heightRatio / 2)
 
       # if we're at the open note, just need to draw the instrument's string.
       if fret == 0

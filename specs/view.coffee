@@ -1,22 +1,25 @@
-console.log('running view tests!')
 
 canvas = document.getElementById('fingerboard')
+events = mkEvents()
 
-$canvas =
-  0: canvas
-  on: () -> true
-  width: () -> 500
-  height: () -> 300
+args =
+  model:
+    strings: 4
+    frets: 6
+    tuning: [16, 21, 26, 31]
 
-args = new Object
-console.log(canvas.height)
-model = new Model(args, events)
 
-view = new View(args, $canvas, model, events)
+model = new Model(args.model, events)
+
+view = new View(args, canvas, model, events)
 view.updateDimensions()
 view.paint()
 
-
-describe 'foo', ->
-  it 'should be high', ->
-    expect(canvas.height).toEqual(300)
+describe 'view events', ->
+  it 'should be able to find notes anywhere on the canvas', ->
+    for y in [1..canvas.offsetHeight - 50] by 50
+      for x in [1..canvas.offsetWidth - 50] by 50
+        {string, fret} = view.pinpointNote(x, y)
+        expect(model.notes[fret]).toBeDefined()
+        note = model.notes[fret][string - 1]
+        expect(note).toBeDefined()

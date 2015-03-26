@@ -99,6 +99,10 @@ body {
 		}
 	})
 
+	fingerboard.noteclick(function(note){
+		console.log(note)
+	})
+
 	fingerboard.notehover(function(note){
 		$('#hovered-note').text(note.interval.notation + note.interval.index)
 	})
@@ -158,12 +162,7 @@ body {
 			else if(colorScheme == 'green')
 				args.drawSelector = curry('#1C5C21','#6AAB6F')
 
-
-
 			fingerboard.set({view: args})
-
-
-
 
 		})
 	})

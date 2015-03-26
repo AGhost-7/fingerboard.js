@@ -1,5 +1,6 @@
 module.exports = ->
 	sourceFiles = [
+		'src/events.coffee'
 		'src/index.coffee'
 		'src/utils/*.coffee'
 		'src/model/*.coffee'
@@ -23,7 +24,7 @@ module.exports = ->
 				files:
 					'dist/fingerboard-test.js': sourceFiles
 					'specs/model.js': ['specs/model.coffee']
-					'specs/view.js': ['specs/view.js']
+					'specs/view.js': ['specs/view.coffee']
 		jasmine:
 			default:
 				src: 'dist/fingerboard-test.js'

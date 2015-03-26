@@ -22,21 +22,9 @@ class Interval
 		# the degree is the displayed value of the shift integer
 		@degree = -1
 
-class Square
-
-	constructor: ->
-		@x1 = -1
-		@y1 = -1
-		@x2 = -1
-		@y2 = -1
-
-	isPointWithinBounds: (x, y) ->
-		x > @x1 && x <= @x2 && y > @y1 && y <= @y2
-
 
 class Note
 	constructor: (@fret, @string) ->
-		@dimension = new Square
 		@interval = new Interval
 
 	log: ->
