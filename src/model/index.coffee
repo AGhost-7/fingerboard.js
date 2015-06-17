@@ -22,7 +22,6 @@ class Model
 		scale:
 			values: Array<Number>
 			root: Number
-		selector: Function (Note) => String
 	###
 	constructor: (args, @events) ->
 		# contains the note objects

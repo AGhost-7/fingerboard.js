@@ -98,10 +98,12 @@ class View
 
   drawInlay: (context, color, x, y, width, height) ->
     context
-      .beginAt(x - (width / 2), y)
+      .color(color)
+      .beginPath()
+      .moveTo(x - (width / 2), y)
       .lineTo(x, (y - (height / 2)))
       .lineTo(x + (width / 2), y)
-      .fillStyle(color)
+      .lineTo(x, (y + (height / 2)))
       .fill()
 
   drawSelector: (context, note, x, y, radius) ->
@@ -181,13 +183,33 @@ class View
 
       if string == 1
         @drawFret(@context, fret, fretStart, @height, @colors.frets)
-
         switch fret
           when 3, 5, 7, 9
-            @drawInlay(@context, inlayX, @height / 2, radius * 3, radius * 6)
+            @drawInlay(
+                @context,
+                @colors.inlays,
+                inlayX,
+                @height / 2,
+                radius * 3,
+                radius * 6
+                )
           when 12
-            @drawInlay(@context, inlayX, @height / 3, radius * 3, radius *6)
-            @drawInlay(@context, inlayX, 2 * (@height / 3), radius * 3, radius *6)
+            @drawInlay(
+                @context,
+                @colors.inlays,
+                inlayX,
+                @height / 3,
+                radius * 3,
+                radius * 6
+                )
+            @drawInlay(
+                @context,
+                @colors.inlays,
+                inlayX,
+                2 * (@height / 3),
+                radius * 3,
+                radius * 6
+                )
 
       @drawSelector(@context, note, inlayX, stringY, radius)
 

@@ -1,4 +1,4 @@
-###
+### Constructor Arguments
 		model:
 			frets : Number
 			strings: Number
@@ -14,7 +14,6 @@
 			drawSelector
 			drawString
 			drawFret
-
 
 ###
 class Fingerboard

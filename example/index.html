@@ -105,6 +105,7 @@ body {
 	})
 
 	fingerboard.notehover(function(note){
+		console.log(note)
 		$('#hovered-note').text(note.interval.notation + note.interval.index)
 	})
 
