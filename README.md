@@ -3,11 +3,11 @@ Constructor and `set` method has the same options.
 canvas = document.getElementsByTagName('canvas')[0]
 fingerboard = new Fingerboard(canvas,
 
-	# contains all data related shizzle.
-	model:
+  # contains all data related shizzle.
+  model:
 
-    	# determine how many strings the instrument will have
-    	strings: 6
+      # determine how many strings the instrument will have
+      strings: 6
 
         # determine how many frets the instrument will have
         frets: 18
@@ -22,31 +22,31 @@ fingerboard = new Fingerboard(canvas,
 
         interval:
 
-        	# you may use this to override the default displayed values to the user. Its
+          # you may use this to override the default displayed values to the user. Its
             # also possible to change this to microtonal values (its not restricted to
             # arrays of 12 notes).
-			notation: ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+      notation: ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
 
             # you can adjust the maximum length that the  fingerboard will calculate the
             # notes to. E.g., you could limit it to B4, or B20 if you wanted instead
             # (although b20 would be well beyond what the human ear can detect).
-			maxIndex: 8
+      maxIndex: 8
 
         scale:
 
-        	# You can select the values which will be part of the scale relative to the
+          # You can select the values which will be part of the scale relative to the
             # root. E.g., if you want to select F where the key is E, the value will be
             # 2.
-			values: [1, 3, 5, 6, 8, 10, 12]
+      values: [1, 3, 5, 6, 8, 10, 12]
 
-			# this is the root of the scale, e.g., 1 is for playing in C, 3 in D, etc.
-    		root: 1
+      # this is the root of the scale, e.g., 1 is for playing in C, 3 in D, etc.
+        root: 1
 
 
 
     view:
 
-    	# you can override some of the drawn components here.
+      # you can override some of the drawn components here.
         drawSelector: (context, note, x, y, radius) ->
 
         drawString: (context, color, width, stringY, openX) ->
