@@ -12,9 +12,9 @@ fingerboard = new Fingerboard(canvas,
         # determine how many frets the instrument will have
         frets: 18
 
-        # Each value of the tuning of the instrument in integer notation. The value
-        # is the note's zero-base integer representation (e.g., D would be 2) with
-        # the index multiplied by the scale's length.
+        # Each value of the tuning of the instrument in integer notation. The
+        # value is the note's zero-base integer representation (e.g., D would be
+        # 2) with the index multiplied by the scale's length.
         # equation: integer notation + index * scale length
         # example (E4): 5 + 4 * 12
         # The tuning shown here is the standard guitar tuning.
@@ -22,25 +22,32 @@ fingerboard = new Fingerboard(canvas,
 
         interval:
 
-          # you may use this to override the default displayed values to the user. Its
-            # also possible to change this to microtonal values (its not restricted to
-            # arrays of 12 notes).
-      notation: ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+          # you may use this to override the default displayed values to the
+          # user. Its also possible to change this to microtonal values (its not
+          # restricted to arrays of 12 notes).
+          notation: [
+            'C', 'Db', 'D', 
+            'Eb', 'E', 'F',
+            'Gb', 'G', 'Ab',
+            'A', 'Bb', 'B'
+          ]
 
-            # you can adjust the maximum length that the  fingerboard will calculate the
-            # notes to. E.g., you could limit it to B4, or B20 if you wanted instead
-            # (although b20 would be well beyond what the human ear can detect).
-      maxIndex: 8
+          # you can adjust the maximum length that the  fingerboard will
+          # calculate the notes to. E.g., you could limit it to B4, or B20 if
+          # you wanted instead (although b20 would be well beyond what the human
+          # ear can detect).
+          maxIndex: 8
 
         scale:
 
-          # You can select the values which will be part of the scale relative to the
-            # root. E.g., if you want to select F where the key is E, the value will be
-            # 2.
-      values: [1, 3, 5, 6, 8, 10, 12]
+          # You can select the values which will be part of the scale relative
+          # to the root. E.g., if you want to select F where the key is E, the
+          # value will be 2.
+          values: [1, 3, 5, 6, 8, 10, 12]
 
-      # this is the root of the scale, e.g., 1 is for playing in C, 3 in D, etc.
-        root: 1
+          # this is the root of the scale, e.g., 1 is for playing in C, 3 in D,
+          # etc.
+          root: 1
 
 
 
