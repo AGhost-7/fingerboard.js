@@ -5,28 +5,27 @@
 
 class ContextWrapper {
 	constructor (context) {
-		// TODO: ????
-		//for key of context
-		//	# the warning is a bit annoying...
-		//	if key != 'webkitImageSmoothingEnabled'
-		//		if typeof context[key] == 'function'
-		//			this.[key] = do(key) ->
-		//				() ->
-		//					context[key].apply(context, arguments)
-		//					this.
-		//		else
-		//			this.[key] = do(key) ->
-		//				(val) ->
-		//					context[key] = val
-		//					this.
-
-
+		for(let key in context) {
+			if(key !== 'webkitImageSmoothingEnabled') {
+				if(typeof context[key] === 'function') {
+					this[key] = (...args) => {
+						context[key].apply(context, args)
+						return this
+					}
+				} else {
+					this[key] = (val) => {
+						context[key] = val
+						return this
+					}
+				}
+			}
+		}
 		this.context = context
 	}
 
 	begin () {
 		this.context.beginPath()
-		this
+		return this
 	}
 
 	beginAt (x ,y) {
@@ -37,11 +36,11 @@ class ContextWrapper {
 
 	color (col) {
 		this.context.fillStyle = col
-		this
+		return this
 	}
 
 	get (key) {
-		this.context[key]
+		return this.context[key]
 	}
 
 }

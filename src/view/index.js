@@ -31,14 +31,14 @@ class View {
 
     // listen for changes on the canvas, or data
     //$(window).resize(this.repaint)
-    window.addEventListener('resize', this.repaint)
+    window.addEventListener('resize', this.repaint.bind(this))
     // this will need to be triggered manually
-    this.canvas.addEventListener('resize', this.repaint)
-    this.events.modelchange(this.repaint)
+    this.canvas.addEventListener('resize', this.repaint.bind(this))
+    this.events.modelchange(this.repaint.bind(this))
 
     // setup event services
-    this.canvas.addEventListener("click", this.onMouseClick)
-    this.canvas.addEventListener('mousemove', this.onMouseMove)
+    this.canvas.addEventListener("click", this.onMouseClick.bind(this))
+    this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this))
 
     this.set(args)
 	}
@@ -203,15 +203,14 @@ class View {
       // typically viewed upside down (so that its easy to read the graphic with
       // the instrument in hand).
       let stringInvert = this.model.strings - string + 1
-      //console.log(stringInvert)
       // the string is located in the middle of the note
       let stringY = ((stringInvert - 1) * heightRatio) + (heightRatio / 2)
       // inlay is located at the center of the note.
       let inlayX = fretStart + ((!fret ? openFretWidth : fretWidth) / 2)
 
 			// if we're at the open note, just need to draw the instrument's string.
-      if (fret === 0) {
-        this.drawString(this.context, this.colors.strings, this.width, stringY, openFretWidth)
+			if (fret === 0) {
+				this.drawString(this.context, this.colors.strings, this.width, stringY, openFretWidth)
 			}
 
       if (string == 1) {

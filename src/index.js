@@ -1,5 +1,7 @@
 import View from './view'
 import Model from './model'
+import mkEvents from './events'
+
 
 /**
  * Constructor Arguments

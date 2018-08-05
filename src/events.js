@@ -1,5 +1,5 @@
-mkEvents = () => {
-	listeners = {
+const mkEvents = () => {
+	const listeners = {
 		// Returns the note that the mouse is parked on when the canvas
 		// is clicked.
 		noteclick: [],
@@ -12,7 +12,7 @@ mkEvents = () => {
 
 	const self = {
 		broadcast (event, ...pass) {
-			for(listener of listeners[event]) {
+			for(let listener of listeners[event]) {
 				listener.apply(null, pass)
 			}
 		},
@@ -27,3 +27,4 @@ mkEvents = () => {
 
 	return self
 }
+export default mkEvents

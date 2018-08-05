@@ -4,7 +4,7 @@
  */
 
 import range from '../utils/range'
-import {Note} from './note'
+import Note from './note'
 
 class Model {
 
@@ -56,7 +56,7 @@ class Model {
 		this.notes = []
 		for(let fret of range(0, this.frets)) {
 			this.notes[fret] = []
-			for(string of range(1, this.strings)) {
+			for(let string of range(1, this.strings)) {
 				this.notes[fret][string-1] = new Note(fret, string)
 			}
 		}
@@ -69,7 +69,7 @@ class Model {
 			throw new Error('Tuning is invalid for the number of strings given.')
 		}
 		const ln = (this.scaleLength * (this.maxIndex + 1)) - 1
-		intervals = range(0, ln)
+		const intervals = range(0, ln)
 			.map((i) => {
 				const f = i + 1
 				const index = Math.floor(i / this.scaleLength)
@@ -85,7 +85,7 @@ class Model {
 
 		// I can now slap it on the notes
 		this.forEach((note, fret, string) => {
-			interval = intervals[this.tuning[string - 1] + fret]
+			const interval = intervals[this.tuning[string - 1] + fret]
 			for(let key in interval) {
 				note.interval[key] = interval[key]
 			}
@@ -223,3 +223,4 @@ class Model {
 		result
 	}
 }
+export default Model

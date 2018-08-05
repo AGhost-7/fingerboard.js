@@ -36,4 +36,4 @@ class Note {
 	}
 }
 
-export default {Interval, Note}
+export default Note

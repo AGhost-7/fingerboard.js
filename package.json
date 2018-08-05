@@ -2,13 +2,16 @@
   "name": "fingerboard.js",
   "version": "0.2.0",
   "scripts": {
-    "dev": "",
-    "test": "",
-    "package": ""
+    "dev": "babel -w -d lib src",
+    "example": "parcel example/index.html",
+    "build": "babel -d lib src",
+    "test": ""
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "jquery": "^2.2.4",
+    "parcel-bundler": "^1.9.7"
   },
   "dependencies": {}
 }
