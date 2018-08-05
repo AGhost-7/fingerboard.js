@@ -5,7 +5,7 @@
     "dev": "babel -w -d lib src",
     "example": "parcel example/index.html",
     "build": "babel -d lib src",
-    "test": "",
+    "test": "mocha --require babel-register test/*.js",
     "format": "prettier --write '**/*.js'",
     "lint": "prettier --list-different '**/*.js' && eslint '**/*.js'",
     "fix": "eslint --fix '**/*.js'"
@@ -13,6 +13,9 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-power-assert": "^2.0.0",
+    "babel-register": "^6.26.0",
+    "browser-env": "^3.2.5",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.13.0",
@@ -20,7 +23,9 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "jquery": "^2.2.4",
+    "mocha": "^5.2.0",
     "parcel-bundler": "^1.9.7",
+    "power-assert": "^1.6.0",
     "prettier": "^1.14.0"
   },
   "dependencies": {}

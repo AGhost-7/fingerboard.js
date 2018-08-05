@@ -1,3 +1,6 @@
+import browserEnv from 'browser-env'
+
+browserEnv(['window', 'document'])
 
 canvas = document.getElementById('fingerboard')
 events = mkEvents()
