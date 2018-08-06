@@ -15,7 +15,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-power-assert": "^2.0.0",
     "babel-register": "^6.26.0",
-    "browser-env": "^3.2.5",
     "eslint": "^5.3.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.13.0",
