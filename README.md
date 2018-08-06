@@ -78,3 +78,16 @@ fingerboard.noteclick((note) => {
   console.log(`Note at string ${note.string}, fret ${note.fret} was clicked!`)
 })
 ```
+
+## Example
+An example application using this library can be found under the `example`
+directory. View the example, run:
+```bash
+git clone git@github.com:AGhost-7/fingerboard.js
+cd fingerboard.js
+npm install
+npm run build
+npm run example
+```
+
+And navigate to `localhost:1234`.

@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "babel -w -d lib src",
     "example": "parcel example/index.html",
+		"example:build": "parcel build example/index.html",
     "build": "babel -d lib src",
     "test": "mocha --require babel-register test/*.js",
     "format": "prettier --write '**/*.js'",

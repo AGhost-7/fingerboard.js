@@ -1,8 +1,6 @@
 import $ from 'jquery'
 import Fingerboard from '../src'
 
-console.log(Fingerboard)
-console.log($)
 
 var fingerboard = new Fingerboard($('#fingerboard')[0], {
   model: {
