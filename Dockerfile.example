@@ -12,6 +12,10 @@ RUN npm install && \
 	npm run build && \
 	npm run example:build
 
-WORKDIR /fingerboard/dist
+FROM node:carbon
+
+COPY --from=0 /fingerboard/dist /fingerboard
+
+WORKDIR /fingerboard
 
 CMD ["python", "-m", "SimpleHTTPServer", "8000"]
